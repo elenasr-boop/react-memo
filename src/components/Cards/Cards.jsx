@@ -40,7 +40,7 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   // Текущий статус игры
@@ -179,6 +179,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5 }) {
           {status === STATUS_PREVIEW ? (
             <div>
               <p className={styles.previewText}>Запоминайте пары!</p>
+              <p>{isThreeTries}</p>
               <p className={styles.previewDescription}>Игра начнется через {previewSeconds} секунд</p>
             </div>
           ) : (
