@@ -70,3 +70,18 @@
 
   margin-bottom: -12px;
 }
+
+.errors {
+  color: #fff;
+  font-size: 20px;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-family: StratosSkyeng;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 8px;
+}
+
+.errorsNum {
+  color: #7ac100;
+}

@@ -40,9 +40,10 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true }) {
+export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
+  const [errors, setErrors] = useState(3);
   // Текущий статус игры
   const [status, setStatus] = useState(STATUS_PREVIEW);
 
@@ -67,12 +68,14 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true 
     setGameStartDate(startDate);
     setTimer(getTimerValue(startDate, null));
     setStatus(STATUS_IN_PROGRESS);
+    setErrors(3);
   }
   function resetGame() {
     setGameStartDate(null);
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
+    setErrors(3);
   }
 
   /**
@@ -123,7 +126,17 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true 
       return false;
     });
 
-    const playerLost = openCardsWithoutPair.length >= 2;
+    if (openCardsWithoutPair.length > 1 && isThreeTries) {
+      openCardsWithoutPair.forEach(card => {
+        setErrors(errors - 1);
+
+        setTimeout(() => {
+          card.open = false;
+        }, 1000);
+      });
+    }
+
+    const playerLost = !isThreeTries ? openCardsWithoutPair.length >= 2 : errors === 0;
 
     // "Игрок проиграл", т.к на поле есть две открытые карты без пары
     if (playerLost) {
@@ -179,7 +192,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true 
           {status === STATUS_PREVIEW ? (
             <div>
               <p className={styles.previewText}>Запоминайте пары!</p>
-              <p>{isThreeTries}</p>
               <p className={styles.previewDescription}>Игра начнется через {previewSeconds} секунд</p>
             </div>
           ) : (
@@ -188,7 +200,6 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true 
                 <div className={styles.timerDescription}>min</div>
                 <div>{timer.minutes.toString().padStart("2", "0")}</div>
               </div>
-              .
               <div className={styles.timerValue}>
                 <div className={styles.timerDescription}>sec</div>
                 <div>{timer.seconds.toString().padStart("2", "0")}</div>
@@ -196,6 +207,13 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries = true 
             </>
           )}
         </div>
+        {isThreeTries === 1 && status === STATUS_IN_PROGRESS ? (
+          <div>
+            <div className={styles.errors}>
+              Осталось попыток: <span className={styles.errorsNum}>{errors}</span>
+            </div>
+          </div>
+        ) : null}
         {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
       </div>
 
