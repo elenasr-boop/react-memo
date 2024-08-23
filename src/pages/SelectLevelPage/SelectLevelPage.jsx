@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
+import { useState } from "react";
 
 export function SelectLevelPage() {
+  const [isThreeTries, setIsThreeTries] = useState(true);
+
+  function handleClickOnCheckbox(value) {
+    setIsThreeTries(!value);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
@@ -23,6 +30,24 @@ export function SelectLevelPage() {
             </Link>
           </li>
         </ul>
+        <div className={styles.cont}>
+          <div className={styles.inscription}>Вам дается одна попытка?</div>
+          <div className={styles.toggleWrapper}>
+            <div className={styles.toggleCheckcross}>
+              <input
+                className={styles.checkcross}
+                id="checkcross"
+                type="checkbox"
+                onClick={() => {
+                  handleClickOnCheckbox(isThreeTries);
+                }}
+              />
+              <label className={styles.toggleItem} htmlFor="checkcross">
+                <div className={styles.check}></div>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
