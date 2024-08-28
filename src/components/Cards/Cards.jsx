@@ -1,10 +1,11 @@
 import { shuffle } from "lodash";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { generateDeck } from "../../utils/cards";
 import styles from "./Cards.module.css";
 import { EndGameModal } from "../../components/EndGameModal/EndGameModal";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
+import { ModeContext } from "../../context";
 
 // Игра закончилась
 const STATUS_LOST = "STATUS_LOST";
@@ -40,7 +41,7 @@ function getTimerValue(startDate, endDate) {
  * pairsCount - сколько пар будет в игре
  * previewSeconds - сколько секунд пользователь будет видеть все карты открытыми до начала игры
  */
-export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries }) {
+export function Cards({ previewSeconds = 5 }) {
   // В cards лежит игровое поле - массив карт и их состояние открыта\закрыта
   const [cards, setCards] = useState([]);
   const [errors, setErrors] = useState(3);
@@ -57,6 +58,10 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries }) {
     seconds: 0,
     minutes: 0,
   });
+
+  const { mode } = useContext(ModeContext);
+  const pairsCount = mode.amount;
+  const isThreeTries = mode.isThreeTries;
 
   function finishGame(status = STATUS_LOST) {
     setGameEndDate(new Date());
@@ -207,7 +212,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries }) {
             </>
           )}
         </div>
-        {isThreeTries === 1 && status === STATUS_IN_PROGRESS ? (
+        {isThreeTries && status === STATUS_IN_PROGRESS ? (
           <div>
             <div className={styles.errors}>
               Осталось попыток: <span className={styles.errorsNum}>{errors}</span>

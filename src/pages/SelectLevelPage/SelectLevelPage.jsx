@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
+import { ModeContext } from "../../context";
 import styles from "./SelectLevelPage.module.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export function SelectLevelPage() {
   const [isThreeTries, setIsThreeTries] = useState(false);
   const [amount, setAmount] = useState(3);
+  const { setMode } = useContext(ModeContext);
 
   function handleClickOnCheckbox(value) {
     setIsThreeTries(!value);
@@ -21,6 +24,7 @@ export function SelectLevelPage() {
               name="amount"
               value="3"
               id="3"
+              checked={amount === 3}
               onChange={() => {
                 setAmount(3);
               }}
@@ -82,9 +86,12 @@ export function SelectLevelPage() {
           className={styles.startGame}
           onClick={() => {
             console.log(`Режим выбран: ${amount} карт. Три попытки? ${isThreeTries}.`);
+            setMode({ amount: amount, isThreeTries: isThreeTries });
           }}
         >
-          Начать игру
+          <Link className={styles.startGameLink} to="/game">
+            Начать игру
+          </Link>
         </button>
       </div>
     </div>
