@@ -132,7 +132,7 @@ export function Cards({ pairsCount = 3, previewSeconds = 5, isThreeTries }) {
 
         setTimeout(() => {
           card.open = false;
-        }, 1000);
+        }, 500);
       });
     }
 
