@@ -1,40 +1,65 @@
-import { Link } from "react-router-dom";
 import styles from "./SelectLevelPage.module.css";
 import { useState } from "react";
 
 export function SelectLevelPage() {
-  const [isThreeTries, setIsThreeTries] = useState(0);
+  const [isThreeTries, setIsThreeTries] = useState(false);
+  const [amount, setAmount] = useState(3);
 
   function handleClickOnCheckbox(value) {
-    if (value === 0) {
-      value = 1;
-    } else {
-      value = 0;
-    }
-    setIsThreeTries(value);
+    setIsThreeTries(!value);
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
         <h1 className={styles.title}>Выбери сложность</h1>
-        <ul className={styles.levels}>
-          <li className={styles.level}>
-            <Link className={styles.levelLink} to={"/game/3" + isThreeTries}>
-              1
-            </Link>
-          </li>
-          <li className={styles.level}>
-            <Link className={styles.levelLink} to={"/game/6" + isThreeTries}>
-              2
-            </Link>
-          </li>
-          <li className={styles.level}>
-            <Link className={styles.levelLink} to={"/game/9" + isThreeTries}>
+        <fieldset className={styles.levels}>
+          <div className={styles.level}>
+            <input
+              type="radio"
+              className={styles.levelInput}
+              name="amount"
+              value="3"
+              id="3"
+              onChange={() => {
+                setAmount(3);
+              }}
+            />
+            <label htmlFor="3" className={styles.levelLabel}>
               3
-            </Link>
-          </li>
-        </ul>
+            </label>
+          </div>
+          <div className={styles.level}>
+            <input
+              type="radio"
+              className={styles.levelInput}
+              name="amount"
+              value="6"
+              id="6"
+              onChange={() => {
+                setAmount(6);
+              }}
+            />
+            <label htmlFor="6" className={styles.levelLabel}>
+              6
+            </label>
+          </div>
+          <div className={styles.level}>
+            <input
+              type="radio"
+              className={styles.levelInput}
+              name="amount"
+              value="9"
+              id="9"
+              onChange={() => {
+                setAmount(9);
+              }}
+            />
+            <label htmlFor="9" className={styles.levelLabel}>
+              9
+            </label>
+          </div>
+        </fieldset>
         <div className={styles.cont}>
           <div className={styles.inscription}>Вам дается одна попытка?</div>
           <div className={styles.toggleWrapper}>
@@ -53,6 +78,14 @@ export function SelectLevelPage() {
             </div>
           </div>
         </div>
+        <button
+          className={styles.startGame}
+          onClick={() => {
+            console.log(`Режим выбран: ${amount} карт. Три попытки? ${isThreeTries}.`);
+          }}
+        >
+          Начать игру
+        </button>
       </div>
     </div>
   );
