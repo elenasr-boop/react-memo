@@ -8,7 +8,7 @@
 
 .modal {
   width: 480px;
-  height: 528px;
+  height: 529px;
   border-radius: 12px;
   background: #c2f5ff;
   display: flex;
@@ -102,8 +102,7 @@
 }
 
 .toggleWrapper {
-  flex: 1 1 calc(100% / 3);
-  min-height: 5vh;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,10 +128,10 @@
 .toggleItem {
   width: 7em;
   background: #2e394d;
-  height: 3em;
+  height: 2em;
   display: inline-block;
   border-radius: 50px;
-  margin: 40px;
+  margin: 20px;
   position: relative;
   transition: all 0.3s ease;
   transform-origin: 20% center;
@@ -155,8 +154,8 @@
 }
 .toggleCheckcross .check {
   border-radius: 50%;
-  width: 2.5em;
-  height: 2.5em;
+  width: 1.5em;
+  height: 1.5em;
   position: absolute;
   background: #8BC34A;
   transition: 0.4s ease;
@@ -170,26 +169,26 @@
   transition: 0.4s ease;
 }
 .toggleCheckcross .check::before {
-  width: 25px;
-  transform: rotate(-45deg) translate(-6px, 20px);
+  width: 15px;
+  transform: rotate(-45deg) translate(-3px, 13px);
 }
 .toggleCheckcross .check::after {
   width: 10px;
-  transform: rotate(45deg) translate(20px, 11px);
+  transform: rotate(45deg) translate(11px, 7px);
 }
 
 .checkcross:checked + .toggleItem .check {
-  left: 68px;
+  left: 84px;
   transform: rotate(360deg);
   background: #c34a4a;
 }
 .checkcross:checked + .toggleItem .check::before {
-  width: 27px;
-  transform: rotate(-45deg) translate(-8px, 18px);
+  width: 18px;
+  transform: rotate(-45deg) translate(-4px, 10px);
 }
 .checkcross:checked + .toggleItem .check::after {
-  width: 27px;
-  transform: rotate(45deg) translate(18px, 8px);
+  width: 18px;
+  transform: rotate(45deg) translate(9px, 5px);
 }
 
 .startGame {
@@ -217,4 +216,10 @@
 .startGameLink {
   text-decoration: none;
   color: #fff;
+}
+
+.linkToLeaderboard {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #004980;
 }

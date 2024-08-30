@@ -93,6 +93,9 @@ export function SelectLevelPage() {
             Начать игру
           </Link>
         </button>
+        <Link to="/leaderboard" className={styles.linkToLeaderboard}>
+          Перейти к лидерборду
+        </Link>
       </div>
     </div>
   );
