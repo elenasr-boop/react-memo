@@ -43,7 +43,6 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
           className={styles.input}
           placeholder="Пользователь"
           name="name"
-          label="Пользователь"
           // eslint-disable-next-line no-restricted-globals
           value={name}
           onChange={e => setName(e.target.value)}
