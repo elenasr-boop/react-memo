@@ -74,6 +74,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .inscription {
@@ -102,7 +103,7 @@
 }
 
 .toggleWrapper {
-  height: 30px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

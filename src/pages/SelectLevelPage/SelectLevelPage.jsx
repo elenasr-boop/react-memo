@@ -85,7 +85,6 @@ export function SelectLevelPage() {
         <button
           className={styles.startGame}
           onClick={() => {
-            console.log(`Режим выбран: ${amount} карт. Три попытки? ${isThreeTries}.`);
             setMode({ amount: amount, isThreeTries: isThreeTries });
           }}
         >
