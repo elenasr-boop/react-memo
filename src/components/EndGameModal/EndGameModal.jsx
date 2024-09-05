@@ -13,14 +13,10 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   const title = isWon ? "Вы победили!" : "Вы проиграли!";
   const imgSrc = isWon ? celebrationImageUrl : deadImageUrl;
   const imgAlt = isWon ? "celebration emodji" : "dead emodji";
-  let isLeader = false;
+  let isLeader = isWon && mode.amount === 9;
   const time = gameDurationMinutes * 60 + gameDurationSeconds;
-  const { leaderBoard, setLeaderBoard } = useContext(LeaderBoardContext);
+  const { setLeaderBoard } = useContext(LeaderBoardContext);
   const [name, setName] = useState("Пользователь");
-
-  if (isWon && mode.amount === 9 && (leaderBoard < 10 || leaderBoard[9].time < time)) {
-    isLeader = true;
-  }
 
   async function onButtonLeader() {
     try {
