@@ -12,7 +12,7 @@ export function Leader({ arr }) {
     // a должно быть равным b
     return 0;
   });
-  let array = arrSort.filter(el => el.id < 11);
+  let array = arrSort.slice(0, 10);
 
   return (
     <>
