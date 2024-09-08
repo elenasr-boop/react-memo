@@ -1,5 +1,5 @@
 export async function getLeaderBoard() {
-  const res = await fetch("https://wedev-api.sky.pro/api/leaderboard", {
+  const res = await fetch("https://wedev-api.sky.pro/api/v2/leaderboard", {
     method: "GET",
   });
 

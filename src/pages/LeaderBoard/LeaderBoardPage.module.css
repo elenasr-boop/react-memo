@@ -100,3 +100,13 @@
         width: 324px;
     }
 }
+
+.achivements {
+    display: flex;
+    gap: 6px;
+}
+
+.achivement1, .achivement2 {
+    width: 32px;
+    height: 32px;
+}
