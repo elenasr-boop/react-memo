@@ -1,6 +1,7 @@
 .modal {
   width: 480px;
-  height: 459px;
+  height: auto;
+  min-height: 459px;
   border-radius: 12px;
   background: #c2f5ff;
   display: flex;
@@ -13,6 +14,7 @@
   width: 96px;
   height: 96px;
   margin-bottom: 8px;
+  margin-top: 36px;
 }
 
 .title {
@@ -23,6 +25,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: 48px;
+  text-align: center;
 
   margin-bottom: 28px;
 }
@@ -47,5 +50,57 @@
   font-weight: 400;
   line-height: 72px;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 276px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 28px;
+  
+  font-family: Roboto;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+}
+
+.input::placeholder {
+  color: rgba(153, 153, 153, 1);
+}
+
+.leaderButton {
+  width: 246px;
+  height: 48px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border-radius: 12px;
+  background: #7ac100;
+
+  color: #fff;
+  text-align: center;
+  font-variant-numeric: lining-nums proportional-nums;
+
+  /* Pres → Caption S */
+  font-family: StratosSkyeng;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px; /* 133.333% */
+
+  border: none;
+
+  cursor: pointer;
+}
+
+.leaderButton:hover {
+  background: #7ac100cc;
+}
+
+.leaderLink {
+  color: #fff;
+  text-decoration: none;
 }

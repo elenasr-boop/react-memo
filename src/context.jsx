@@ -11,3 +11,11 @@ export const ModeProvider = ({ children }) => {
 
   return <ModeContext.Provider value={{ mode, setMode }}>{children}</ModeContext.Provider>;
 };
+
+export const LeaderBoardContext = createContext(null);
+
+export const LeaderBoardProvider = ({ children }) => {
+  const [leaderBoard, setLeaderBoard] = useState([]);
+
+  return <LeaderBoardContext.Provider value={{ leaderBoard, setLeaderBoard }}>{children}</LeaderBoardContext.Provider>;
+};

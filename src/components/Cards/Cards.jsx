@@ -241,6 +241,7 @@ export function Cards({ previewSeconds = 5 }) {
             gameDurationSeconds={timer.seconds}
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
+            mode={mode}
           />
         </div>
       ) : null}
