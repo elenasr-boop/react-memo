@@ -271,9 +271,21 @@ export function Cards({ previewSeconds = 5 }) {
           <div className={styles.superPower}>
             <div className={styles.epiphany} onClick={() => epiphany()}>
               <img src="./epiphany.png" alt="" className={styles.superPowerImg1} />
+              <div className={styles.tooltip}>
+                <h3 className={styles.superPowerName}>Прозрение</h3>
+                <p className={styles.superPowerDesc}>
+                  На 5 секунд показываются все карты. Таймер длительности игры на это время останавливается.
+                </p>
+              </div>
             </div>
-            <div className={styles.alohomora} onClick={() => alohomora()}>
-              <img src="./alohomora.png" alt="" className={styles.superPowerImg2} />
+            <div className={styles.epiphany} onClick={() => alohomora()}>
+              <div className={styles.alohomora}>
+                <img src="./alohomora.png" alt="" className={styles.superPowerImg2} />
+              </div>
+              <div className={styles.tooltip}>
+                <h3 className={styles.superPowerName}>Алохомора</h3>
+                <p className={styles.superPowerDesc}>Открывается случайная пара карт.</p>
+              </div>
             </div>
           </div>
         )}

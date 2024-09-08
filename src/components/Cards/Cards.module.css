@@ -110,3 +110,43 @@
   text-align: -webkit-center;
   align-content: center;
 }
+
+.epiphany, .alohomora {
+  position: relative;
+}
+
+.epiphany:hover .tooltip, .alohomora:hover .tooltip {
+  display: block;
+}
+
+.tooltip {
+  display: none;
+  background-color: #C2F5FF;
+  position: absolute;
+  top: 84px;
+  left: -77px;
+  border-radius: 12px;
+  width: 222px;
+  padding: 20px;
+  padding-top: 25px;
+  z-index: 1;
+}
+
+.superPowerDesc {
+  color: #004980;
+  font-family: StratosSkyeng;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;  
+}
+
+.superPowerName {
+  color: #004980;
+  font-family: StratosSkyeng;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+}
