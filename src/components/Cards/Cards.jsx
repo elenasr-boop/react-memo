@@ -75,6 +75,7 @@ export function Cards({ previewSeconds = 5 }) {
     setGameStartDate(startDate);
     setTimer(getTimerValue(startDate, null));
     setStatus(STATUS_IN_PROGRESS);
+    setIsSuperPower([false, false]);
     setErrors(3);
   }
   function resetGame() {
@@ -82,6 +83,7 @@ export function Cards({ previewSeconds = 5 }) {
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
+    setIsSuperPower([false, false]);
     setErrors(3);
   }
 
@@ -155,9 +157,9 @@ export function Cards({ previewSeconds = 5 }) {
   };
 
   function alohomora() {
-    // if (isSuperPower[1]) {
-    //   return;
-    // }
+    if (isSuperPower[1]) {
+      return;
+    }
 
     console.log("Сработала супер-сила алохомора");
     setIsSuperPower([isSuperPower[0], true]);
@@ -261,10 +263,8 @@ export function Cards({ previewSeconds = 5 }) {
           )}
         </div>
         {isThreeTries && status === STATUS_IN_PROGRESS ? (
-          <div>
-            <div className={styles.errors}>
-              Осталось попыток: <span className={styles.errorsNum}>{errors}</span>
-            </div>
+          <div className={styles.errors}>
+            Осталось попыток: <span className={styles.errorsNum}>{errors}</span>
           </div>
         ) : null}
         {status === STATUS_IN_PROGRESS && (

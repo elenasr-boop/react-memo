@@ -30,6 +30,7 @@
   justify-content: space-between;
   align-items: end;
   margin-bottom: 35px;
+  gap: 10px;
 }
 
 .timer {
