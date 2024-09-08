@@ -155,9 +155,32 @@ export function Cards({ previewSeconds = 5 }) {
   };
 
   function alohomora() {
-    if (!isSuperPower[1]) {
-      console.log("Сработала супер-сила алохомора");
-      setIsSuperPower([isSuperPower[0], true]);
+    // if (isSuperPower[1]) {
+    //   return;
+    // }
+
+    console.log("Сработала супер-сила алохомора");
+    setIsSuperPower([isSuperPower[0], true]);
+
+    const closedCards = cards.filter(card => card.open !== true);
+
+    const idOfRandomCard = Math.floor(Math.random() * closedCards.length);
+
+    const firstOpenCard = closedCards[idOfRandomCard];
+
+    const sameCard = closedCards.filter(
+      card => firstOpenCard.suit === card.suit && firstOpenCard.rank === card.rank && firstOpenCard.id !== card.id,
+    );
+
+    sameCard[0].open = true;
+    firstOpenCard.open = true;
+
+    const isPlayerWon = cards.every(card => card.open);
+
+    if (isPlayerWon) {
+      setGameEndDate(new Date());
+      setStatus(STATUS_WON);
+      return;
     }
   }
 
