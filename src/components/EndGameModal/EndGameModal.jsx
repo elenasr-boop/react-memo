@@ -9,7 +9,7 @@ import { LeaderBoardContext } from "../../context";
 import { Link } from "react-router-dom";
 import { addLeader } from "../../api";
 
-export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, mode }) {
+export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, onClick, mode, isSuperPower }) {
   const title = isWon ? "Вы победили!" : "Вы проиграли!";
   const imgSrc = isWon ? celebrationImageUrl : deadImageUrl;
   const imgAlt = isWon ? "celebration emodji" : "dead emodji";
@@ -17,10 +17,11 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
   const time = gameDurationMinutes * 60 + gameDurationSeconds;
   const { setLeaderBoard } = useContext(LeaderBoardContext);
   const [name, setName] = useState("Пользователь");
+  const isHardMode = !mode.isThreeTries;
 
   async function onButtonLeader() {
     try {
-      const result = await addLeader({ name: name, time: time });
+      const result = await addLeader({ name: name, time: time, achievements: [isHardMode, !isSuperPower] });
       if ("error" in result) {
         throw new Error(result.error);
       }

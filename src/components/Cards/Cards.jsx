@@ -14,6 +14,7 @@ const STATUS_WON = "STATUS_WON";
 const STATUS_IN_PROGRESS = "STATUS_IN_PROGRESS";
 // Начало игры: игрок видит все карты в течении нескольких секунд
 const STATUS_PREVIEW = "STATUS_PREVIEW";
+const STATUS_EPIPHANY = "STATUS_EPIPHANY";
 
 function getTimerValue(startDate, endDate) {
   if (!startDate && !endDate) {
@@ -62,6 +63,7 @@ export function Cards({ previewSeconds = 5 }) {
   const { mode } = useContext(ModeContext);
   const pairsCount = mode.amount;
   const isThreeTries = mode.isThreeTries;
+  const [isSuperPower, setIsSuperPower] = useState([false, false]);
 
   function finishGame(status = STATUS_LOST) {
     setGameEndDate(new Date());
@@ -152,6 +154,29 @@ export function Cards({ previewSeconds = 5 }) {
     // ... игра продолжается
   };
 
+  function alohomora() {
+    if (!isSuperPower[1]) {
+      console.log("Сработала супер-сила алохомора");
+      setIsSuperPower([isSuperPower[0], true]);
+    }
+  }
+
+  function epiphany() {
+    if (!isSuperPower[0]) {
+      setIsSuperPower([true, isSuperPower[1]]);
+      setStatus(STATUS_EPIPHANY);
+
+      const timerId = setTimeout(() => {
+        setStatus(STATUS_IN_PROGRESS);
+        setGameStartDate(new Date(gameStartDate.getTime() + 5000));
+      }, 5000);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }
+  }
+
   const isGameEnded = status === STATUS_LOST || status === STATUS_WON;
 
   // Игровой цикл
@@ -194,7 +219,7 @@ export function Cards({ previewSeconds = 5 }) {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.timer}>
-          {status === STATUS_PREVIEW ? (
+          {status === STATUS_PREVIEW || status === STATUS_EPIPHANY ? (
             <div>
               <p className={styles.previewText}>Запоминайте пары!</p>
               <p className={styles.previewDescription}>Игра начнется через {previewSeconds} секунд</p>
@@ -219,6 +244,16 @@ export function Cards({ previewSeconds = 5 }) {
             </div>
           </div>
         ) : null}
+        {status === STATUS_IN_PROGRESS && (
+          <div className={styles.superPower}>
+            <div className={styles.epiphany} onClick={() => epiphany()}>
+              <img src="./epiphany.png" alt="" className={styles.superPowerImg1} />
+            </div>
+            <div className={styles.alohomora} onClick={() => alohomora()}>
+              <img src="./alohomora.png" alt="" className={styles.superPowerImg2} />
+            </div>
+          </div>
+        )}
         {status === STATUS_IN_PROGRESS ? <Button onClick={resetGame}>Начать заново</Button> : null}
       </div>
 
@@ -242,6 +277,7 @@ export function Cards({ previewSeconds = 5 }) {
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
             mode={mode}
+            isSuperPower={isSuperPower[1] || isSuperPower[2]}
           />
         </div>
       ) : null}

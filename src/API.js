@@ -8,12 +8,13 @@ export async function getLeaderBoard() {
   return data;
 }
 
-export async function addLeader({ name, time }) {
-  const res = await fetch("https://wedev-api.sky.pro/api/leaderboard", {
+export async function addLeader({ name, time, achievements }) {
+  const res = await fetch("https://wedev-api.sky.pro/api/v2/leaderboard", {
     method: "POST",
     body: JSON.stringify({
       name: name,
       time: time,
+      achievements: achievements,
     }),
   });
 

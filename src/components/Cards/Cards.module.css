@@ -85,3 +85,27 @@
 .errorsNum {
   color: #7ac100;
 }
+
+.superPower {
+  display: flex;
+  gap: 15px;
+}
+
+.superPowerImg1 {
+  width: 68px;
+  height: 68px;
+}
+
+.superPowerImg2 {
+  width: 46px;
+  height: 49px;
+}
+
+.alohomora {
+  background-color: #C2F5FF;
+  width: 68px;
+  height: 68px;
+  border-radius: 34px;
+  text-align: -webkit-center;
+  align-content: center;
+}
