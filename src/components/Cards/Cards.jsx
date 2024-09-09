@@ -63,7 +63,8 @@ export function Cards({ previewSeconds = 5 }) {
   const { mode } = useContext(ModeContext);
   const pairsCount = mode.amount;
   const isThreeTries = mode.isThreeTries;
-  const [isSuperPower, setIsSuperPower] = useState([false, false]);
+  const [isAlohomora, setIsAlohomora] = useState(true);
+  const [isEpiphany, setIsEpiphany] = useState(true);
 
   function finishGame(status = STATUS_LOST) {
     setGameEndDate(new Date());
@@ -75,7 +76,8 @@ export function Cards({ previewSeconds = 5 }) {
     setGameStartDate(startDate);
     setTimer(getTimerValue(startDate, null));
     setStatus(STATUS_IN_PROGRESS);
-    setIsSuperPower([false, false]);
+    setIsAlohomora(true);
+    setIsEpiphany(true);
     setErrors(3);
   }
   function resetGame() {
@@ -83,7 +85,8 @@ export function Cards({ previewSeconds = 5 }) {
     setGameEndDate(null);
     setTimer(getTimerValue(null, null));
     setStatus(STATUS_PREVIEW);
-    setIsSuperPower([false, false]);
+    setIsAlohomora(true);
+    setIsEpiphany(true);
     setErrors(3);
   }
 
@@ -157,12 +160,11 @@ export function Cards({ previewSeconds = 5 }) {
   };
 
   function alohomora() {
-    if (isSuperPower[1]) {
+    if (!isAlohomora) {
       return;
     }
 
-    console.log("Сработала супер-сила алохомора");
-    setIsSuperPower([isSuperPower[0], true]);
+    setIsAlohomora(false);
 
     const closedCards = cards.filter(card => card.open !== true);
 
@@ -187,8 +189,8 @@ export function Cards({ previewSeconds = 5 }) {
   }
 
   function epiphany() {
-    if (!isSuperPower[0]) {
-      setIsSuperPower([true, isSuperPower[1]]);
+    if (isEpiphany) {
+      setIsEpiphany(false);
       setStatus(STATUS_EPIPHANY);
 
       const timerId = setTimeout(() => {
@@ -312,7 +314,7 @@ export function Cards({ previewSeconds = 5 }) {
             gameDurationMinutes={timer.minutes}
             onClick={resetGame}
             mode={mode}
-            isSuperPower={isSuperPower[1] || isSuperPower[2]}
+            isSuperPower={isAlohomora && isEpiphany}
           />
         </div>
       ) : null}

@@ -21,7 +21,7 @@ export function EndGameModal({ isWon, gameDurationSeconds, gameDurationMinutes, 
 
   async function onButtonLeader() {
     try {
-      const result = await addLeader({ name: name, time: time, hardMode: isHardMode, superPower: !isSuperPower });
+      const result = await addLeader({ name: name, time: time, hardMode: isHardMode, superPower: isSuperPower });
       if ("error" in result) {
         throw new Error(result.error);
       }
