@@ -37,14 +37,14 @@ export function LeaderBoardPage() {
         <div className={styles.headingEl}>
           <p className={styles.num}>Позиция</p>
           <p className={styles.name}>Пользователь</p>
-          <p></p>
+          <div className={styles.achivements}>Достижения</div>
           <p className={styles.time}>Время</p>
         </div>
         {isLoading ? (
           <div className={styles.el}>
             <p className={styles.num}>...</p>
             <p className={styles.name}>...</p>
-            <p></p>
+            <div className={styles.achivements}>...</div>
             <p className={styles.time}>...</p>
           </div>
         ) : (
